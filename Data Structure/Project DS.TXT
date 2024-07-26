@@ -1,0 +1,82 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+struct node
+{
+    char data;
+    node *next;
+};
+
+node *Top = NULL;
+
+class Stack
+{
+public:
+    void push(char val){
+	node *new_Node = new node;
+    	new_Node->data = val;
+    	if(Top==NULL){
+        	Top = new_Node;
+        	new_Node->next = NULL;
+    		}
+    else{
+        new_Node->next = Top;
+        Top = new_Node;
+	}
+	
+}
+	
+	
+    char pop(){
+ 	int value;
+    	if (Top == NULL)
+    	{
+        	cout << "No TEXT. \n";
+        	return -1;
+    	}
+
+    else
+    {
+        node *current = Top;
+        Top = current->next;
+        value = current->data;
+        delete (current);
+        return value;
+    	}
+}
+
+
+    char top(){
+	 return Top->data;
+	}
+};
+
+
+
+string capitalize(string x, Stack y)
+{
+    int i = 0;
+    while(x[i]!='\0')
+    {
+        if (x[i] >= 97 && x[i] <= 122)
+        {
+            x[i] -= 32;
+            y.push(x[i]);
+        }
+        else
+        {
+            y.push(x[i]);
+        }
+        i++;
+    }
+    
+    sort(x.begin(), x.end());
+    return x;
+}
+int main()
+{
+    string a = "zhYauc@MapaOwp!";              
+    Stack b;
+    cout<<capitalize(a, b)<<endl ;
+
+}
